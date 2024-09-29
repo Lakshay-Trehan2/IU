@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Components Order Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .total {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Form for Computer Components</h2>
+        <form id="orderForm">
+            <div class="form-group">
+                <label for="processor">Processor:</label>
+                <select id="processor" name="processor">
+                    <option value="0" disabled selected>Select Processor</option>
+                    <option value="300">Intel i5 - $300</option>
+                    <option value="500">Intel i7 - $500</option>
+                    <option value="700">Intel i9 - $700</option>
+                    <option value="250">AMD Ryzen 5 - $250</option>
+                    <option value="450">AMD Ryzen 7 - $450</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="gpu">Graphics Card:</label>
+                <select id="gpu" name="gpu">
+                    <option value="0" disabled selected>Select Graphics Card</option>
+                    <option value="200">NVIDIA GTX 1660 - $200</option>
+                    <option value="400">NVIDIA RTX 3060 - $400</option>
+                    <option value="600">NVIDIA RTX 3080 - $600</option>
+                    <option value="180">AMD RX 570 - $180</option>
+                    <option value="500">AMD RX 6800 - $500</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ram">RAM (GB):</label>
+                <select id="ram" name="ram">
+                    <option value="0" disabled selected>Select RAM</option>
+                    <option value="50">8 GB - $50</option>
+                    <option value="100">16 GB - $100</option>
+                    <option value="200">32 GB - $200</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="storage">Storage (GB):</label>
+                <select id="storage" name="storage">
+                    <option value="0" disabled selected>Select Storage</option>
+                    <option value="50">256 GB SSD - $50</option>
+                    <option value="100">512 GB SSD - $100</option>
+                    <option value="150">1 TB SSD - $150</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+            </div>
+
+            <div class="total" id="totalPrice">Total: $0.00</div>
+
+            <div class="form-group">
+                <button type="button" onclick="submitOrder()">Submit Order</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function calculateTotal() {
+            let processorPrice = parseInt(document.getElementById('processor').value) || 0;
+            let gpuPrice = parseInt(document.getElementById('gpu').value) || 0;
+            let ramPrice = parseInt(document.getElementById('ram').value) || 0;
+            let storagePrice = parseInt(document.getElementById('storage').value) || 0;
+            let quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            let totalPrice = (processorPrice + gpuPrice + ramPrice + storagePrice) * quantity;
+            document.getElementById('totalPrice').innerText = 'Total: $' + totalPrice.toFixed(2);
+        }
+
+        document.getElementById('orderForm').addEventListener('change', calculateTotal);
+
+        function submitOrder() {
+            alert('Order submitted! Total: ' + document.getElementById('totalPrice').innerText);
+        }
+    </script>
+</body>
+</html>
