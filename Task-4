@@ -1,0 +1,42 @@
+// Trapezoidal's Rule
+function trapezoidalRule(f, a, b, n) {
+    const h = (b - a) / n;
+    let result = (f(a) + f(b)) / 2;
+  
+    for (let i = 1; i < n; i++) {
+      const x = a + i * h;
+      result += f(x);
+    }
+  
+    return h * result;
+  }
+  
+// Simpson's Rule
+  function simpsonsRule(f, a, b, n) {
+    if (n % 2 !== 0) {
+      console.error("Simpson's rule requires an even number of intervals.");
+      return null;
+    }
+  
+    const h = (b - a) / n;
+    let result = f(a) + f(b);
+  
+    for (let i = 1; i < n; i++) {
+      const x = a + i * h;
+      result += (i % 2 === 0) ? 2 * f(x) : 4 * f(x); 
+    }
+  
+    return (h / 3) * result;
+  }
+
+  const exampleFunction = (x) => x * x + 1;
+  
+  const a = 0; 
+  const b = 2; 
+  const n = 6; 
+  
+  const trapezoidalResult = trapezoidalRule(exampleFunction, a, b, n);
+  console.log(`Trapezoidal Rule Result: ${trapezoidalResult.toFixed(6)}`);
+  
+  const simpsonsResult = simpsonsRule(exampleFunction, a, b, n);
+  console.log(`Simpson's Rule Result: ${simpsonsResult.toFixed(6)}`);
